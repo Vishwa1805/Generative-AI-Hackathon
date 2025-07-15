@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyCart - Shopping Cart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <h1 class="brand">MyCart</h1>
+    <button id="dark-mode-toggle" class="icon-btn" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">🌙</button>
+  </header>
+  <main>
+    <section id="cart-page" aria-label="Shopping Cart">
+      <h2>Your Cart</h2>
+      <div id="cart-items" tabindex="0"></div>
+      <div class="cart-actions">
+        <button id="clear-cart-btn" class="danger">Clear Cart</button>
+        <a href="index.html"><button>Back to Shop</button></a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cartContainer = document.getElementById("cart-items");
+    const clearCartBtn = document.getElementById("clear-cart-btn");
+    const darkModeToggleBtn = document.getElementById("dark-mode-toggle");
+
+    let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
+
+    function saveCartAndRender() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function renderCart() {
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        clearCartBtn.disabled = true;
+        return;
+      }
+      clearCartBtn.disabled = false;
+
+      cartContainer.innerHTML = "";
+
+      const table = document.createElement("table");
+      table.style.width = "100%";
+      table.style.borderCollapse = "collapse";
+
+      const trHead = document.createElement("tr");
+      ["Product", "Price", "Quantity", "Total", "Actions"].forEach((text) => {
+        const th = document.createElement("th");
+        th.textContent = text;
+        th.style.borderBottom = "1px solid #ccc";
+        th.style.padding = "8px";
+        th.style.textAlign = "left";
+        trHead.appendChild(th);
+      });
+      table.appendChild(trHead);
+
+      let total = 0;
+
+      cart.forEach((item, idx) => {
+        const tr = document.createElement("tr");
+        tr.style.borderBottom = "1px solid #ddd";
+
+        const tdName = document.createElement("td");
+        tdName.textContent = item.name;
+        tdName.style.padding = "8px";
+
+        const tdPrice = document.createElement("td");
+        tdPrice.textContent = `₹${item.price}`;
+        tdPrice.style.padding = "8px";
+
+        const tdQty = document.createElement("td");
+        tdQty.style.padding = "8px";
+        const qtyInput = document.createElement("input");
+        qtyInput.type = "number";
+        qtyInput.min = 1;
+        qtyInput.value = item.count;
+        qtyInput.style.width = "60px";
+        qtyInput.addEventListener("change", (e) => {
+          const val = Math.max(1, parseInt(e.target.value) || 1);
+          cart[idx].count = val;
+          saveCartAndRender();
+        });
+        tdQty.appendChild(qtyInput);
+
+        const tdTotal = document.createElement("td");
+        const itemTotal = item.price * item.count;
+        total += itemTotal;
+        tdTotal.textContent = `₹${itemTotal}`;
+        tdTotal.style.padding = "8px";
+
+        const tdActions = document.createElement("td");
+        tdActions.style.padding = "8px";
+        const rmBtn = document.createElement("button");
+        rmBtn.textContent = "Remove";
+        rmBtn.style.backgroundColor = "crimson";
+        rmBtn.style.color = "white";
+        rmBtn.style.padding = "5px 10px";
+        rmBtn.style.border = "none";
+        rmBtn.style.borderRadius = "5px";
+        rmBtn.style.cursor = "pointer";
+        rmBtn.addEventListener("click", () => {
+          cart.splice(idx, 1);
+          saveCartAndRender();
+        });
+        tdActions.appendChild(rmBtn);
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdQty);
+        tr.appendChild(tdTotal);
+        tr.appendChild(tdActions);
+
+        table.appendChild(tr);
+      });
+
+      // Total row
+      const totalRow = document.createElement("tr");
+
+      const tdLabel = document.createElement("td");
+      tdLabel.colSpan = 3;
+      tdLabel.style.fontWeight = "700";
+      tdLabel.style.padding = "8px";
+      tdLabel.textContent = "Total:";
+      totalRow.appendChild(tdLabel);
+
+      const tdValue = document.createElement("td");
+      tdValue.textContent = `₹${total}`;
+      tdValue.style.fontWeight = "700";
+      tdValue.style.padding = "8px";
+      totalRow.appendChild(tdValue);
+
+      const tdEmpty = document.createElement("td");
+      totalRow.appendChild(tdEmpty);
+
+      table.appendChild(totalRow);
+
+      cartContainer.appendChild(table);
+    }
+
+    function clearCart() {
+      if (confirm("Are you sure you want to clear the cart?")) {
+        cart = [];
+        saveCartAndRender();
+      }
+    }
+
+    darkModeToggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem(
+        "dark-mode",
+        document.body.classList.contains("dark") ? "true" : "false"
+      );
+    });
+
+    if (localStorage.getItem("dark-mode") === "true") {
+      document.body.classList.add("dark");
+    }
+
+    clearCartBtn.addEventListener("click", clearCart);
+
+    renderCart();
+  </script>
+</body>
+</html>

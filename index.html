@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyCart - Professional Shop</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  
+  <!-- Model Viewer for 3D -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <h1 class="brand">Hackathon Web Shopping Site</h1>
+    <button id="dark-mode-toggle" class="icon-btn" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">🌙</button>
+  </header>
+
+  <main role="main">
+    <section id="product-list" aria-label="Product List">
+      <h2>Products</h2>
+      <div class="optionsbar">
+        <input type="search" id="search-box" placeholder="Search products..." aria-label="Search products" />
+        <button id="clear-search" aria-label="Clear search" title="Clear search" hidden>✕</button>
+        <button id="filter" aria-label="Filter products">Filter</button>
+        <button id="cart" class="cart-btn" aria-label="Go to Cart">
+          🛒 Cart <span id="cart-count" class="cart-count" aria-live="polite"></span>
+        </button>
+      </div>
+      <div id="products" tabindex="0"></div>
+    </section>
+
+    <aside id="product-detail" aria-label="Product Details">
+      <h2>Product Details</h2>
+      <button id="back-to-products" hidden aria-label="Back to products list">← Back to Products</button>
+      <div id="detail-content">
+        <p>Select a product to see details.</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="index.js"></script>
+</body>
+</html>
