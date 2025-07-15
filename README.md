@@ -2,6 +2,9 @@
 
 This is a responsive e-commerce website built for a hackathon, using HTML, CSS, and JavaScript, enhanced with dark mode, a persistent cart, and real product images.
 
+## 🚀 Live Site
+https://vishwa1805.github.io/Generative-AI-Hackathon/
+
 
 
 🐞 Bugs Fixed
