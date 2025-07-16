@@ -46,7 +46,7 @@ A **responsive e-commerce website** built for a hackathon using **HTML, CSS, and
 ---
 
 ## 📂 Project Structure
-\`\`\`
+```
 Hackathon/
 ├── index.html
 ├── cart.html
@@ -57,7 +57,7 @@ Hackathon/
     ├── camera.jpg
     ├── hat.jpg
     └── ...etc
-\`\`\`
+```
 
 ---
 
