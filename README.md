@@ -7,7 +7,7 @@ https://vishwa1805.github.io/Generative-AI-Hackathon/
 
 
 
-🐞 Bugs Fixed
+##🐞 Bugs Fixed
 ✅ Cart array initialization was incorrect — now defaults to [] if localStorage is empty.
 ✅ LocalStorage was overwritten twice (setItem bug) — fixed to only store serialized data.
 ✅ showProductDetail used fragile onclick handlers — improved with safe string handling.
@@ -15,7 +15,7 @@ https://vishwa1805.github.io/Generative-AI-Hackathon/
 ✅ Broken search filter — made case-insensitive and ensured it works across all categories.
 ✅ CSS and HTML cleanup for consistent IDs and class naming.
 
-✨ Enhancements Made
+##✨ Enhancements Made
 🌟 Integrated product images (inside images/) for a richer UI.
 🌟 Added category-based grouping (Shoes, Electronics, Clothing, Accessories).
 🌟 Built a dark mode toggle 🌙 that persists across all pages.
@@ -24,9 +24,9 @@ https://vishwa1805.github.io/Generative-AI-Hackathon/
 🌟 Cart page shows a clear total, plus option to clear cart.
 🌟 Fully responsive layout using Flexbox and Grid.
 
-🤖 AI Tools Used & How They Helped
+##🤖 AI Tools Used & How They Helped
 ChatGPT (by OpenAI)
-🚀 Assisted in debugging, generating product data, designing responsive CSS, cleaning up JavaScript logic, and writing this README.
+##🚀 Assisted in debugging, generating product data, designing responsive CSS, cleaning up JavaScript logic, and writing this README.
 
 GitHub Copilot (VS Code)
 ✍ Helped autocomplete standard JavaScript methods and reduce boilerplate.
@@ -34,7 +34,7 @@ GitHub Copilot (VS Code)
 AI design suggestions (perplexity)
 🖌 Proposed modern UI interactions and color themes.
 
-💻 Tech Stack
+##💻 Tech Stack
 
 HTML5
 
@@ -44,10 +44,11 @@ Vanilla JavaScript
 
 Images stored locally in images/ directory
 
-📂 Project Structure
+##📂 Project Structure
 markdown
 Copy
 Edit
+```
 Hackathon/
 ├── index.html
 ├── cart.html
@@ -58,6 +59,7 @@ Hackathon/
     ├── camera.jpg
     ├── hat.jpg
     └── ...etc
+```
 🌙 Dark Mode
 Click the 🌙 icon to toggle between light & dark.
 
